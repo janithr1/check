@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: check variable
       - run: | 
-          echo "${{secrets.AWS_CHECK}}"
+          echo "${{secrets.AWS_CHECK}} hi "
