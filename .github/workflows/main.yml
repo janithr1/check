@@ -2,16 +2,23 @@ name: Node Continuous Integration
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 env:
   AWS_CHECK: ${{ secrets.AWS_CHECK}}
-
 
 jobs:
   test_pull_request:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: check variable
-      - run: | 
-          echo "${{secrets.AWS_CHECK}} hi "
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Print AWS_CHECK secret
+        run: echo $AWS_CHECK  
