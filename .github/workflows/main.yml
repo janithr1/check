@@ -3,15 +3,15 @@ name: Node Continuous Integration
 on:
   pull_request:
     branches: [main , develop]
-env:
-  AWS_CHECK: ${{ secrets.AWS_CHECK}}
-  AWS_JOB: ${{ secrets.AWS_JOB }}
+# env:
+#   AWS_CHECK: ${{ secrets.AWS_CHECK}}
+#   AWS_JOB: ${{ secrets.AWS_JOB }}
 
 jobs:
   test_pull_request:
     runs-on: ubuntu-latest
     env: 
-      STAGE: ${{ github.ref == 'refs/heads/master' && 'prod' || 'dev' }}
+      STAGE: ${{ github.ref == 'refs/heads/main' && secrets.AWS_CHECK || secrets.AWS_JOB }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -21,7 +21,5 @@ jobs:
 
       - name: Print AWS_CHECK secret
         run: | 
-          echo $AWS_CHECK
-          echo $AWS_JOB
           echo $STAGE
            
