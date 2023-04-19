@@ -5,6 +5,7 @@ on:
     branches: [main]
 env:
   AWS_CHECK: ${{ secrets.AWS_CHECK}}
+  AWS_JOB: ${{ secrets.AWS_JOB }}
 
 jobs:
   test_pull_request:
@@ -18,4 +19,7 @@ jobs:
         run: npm install
 
       - name: Print AWS_CHECK secret
-        run: echo $AWS_CHECK  
+        run: | 
+          echo $AWS_CHECK
+          echo $AWS_JOB
+           
